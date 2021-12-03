@@ -1,0 +1,12 @@
+.screen {
+  display: flex;
+  flex: 1;
+  //background: var(--light-color);
+}
+
+.sampleHolder {
+  display: flex;
+  flex: 1;
+  gap: 0.25em;
+  align-items: flex-end;
+}

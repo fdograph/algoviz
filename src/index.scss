@@ -1,0 +1,22 @@
+:root {
+  --dark-color: hsla(0deg, 0%, 10%, 1);
+  --light-color: hsla(0deg, 0%, 90%, 1);
+  --primary-color: hsla(345deg, 100%, 50%, 1);
+  --secondary-color: hsla(60deg, 100%, 50%, 1);
+  --complementary-color: hsla(225deg, 100%, 50%, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  font-size: 1em;
+  background: var(--dark-color);
+  color: var(--light-color);
+}
+
