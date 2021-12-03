@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.5a4867d4.chunk.css",
-    "main.js": "/static/js/main.91357684.chunk.js",
-    "main.js.map": "/static/js/main.91357684.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.5c107b6a.js",
-    "runtime-main.js.map": "/static/js/runtime-main.5c107b6a.js.map",
-    "static/js/2.9ab7502f.chunk.js": "/static/js/2.9ab7502f.chunk.js",
-    "static/js/2.9ab7502f.chunk.js.map": "/static/js/2.9ab7502f.chunk.js.map",
-    "static/js/3.aee59814.chunk.js": "/static/js/3.aee59814.chunk.js",
-    "static/js/3.aee59814.chunk.js.map": "/static/js/3.aee59814.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.5a4867d4.chunk.css.map": "/static/css/main.5a4867d4.chunk.css.map",
-    "static/js/2.9ab7502f.chunk.js.LICENSE.txt": "/static/js/2.9ab7502f.chunk.js.LICENSE.txt"
+    "main.css": "/algoviz/static/css/main.5a4867d4.chunk.css",
+    "main.js": "/algoviz/static/js/main.06d0b261.chunk.js",
+    "main.js.map": "/algoviz/static/js/main.06d0b261.chunk.js.map",
+    "runtime-main.js": "/algoviz/static/js/runtime-main.0a275c40.js",
+    "runtime-main.js.map": "/algoviz/static/js/runtime-main.0a275c40.js.map",
+    "static/js/2.de1c0888.chunk.js": "/algoviz/static/js/2.de1c0888.chunk.js",
+    "static/js/2.de1c0888.chunk.js.map": "/algoviz/static/js/2.de1c0888.chunk.js.map",
+    "static/js/3.893bb022.chunk.js": "/algoviz/static/js/3.893bb022.chunk.js",
+    "static/js/3.893bb022.chunk.js.map": "/algoviz/static/js/3.893bb022.chunk.js.map",
+    "index.html": "/algoviz/index.html",
+    "static/css/main.5a4867d4.chunk.css.map": "/algoviz/static/css/main.5a4867d4.chunk.css.map",
+    "static/js/2.de1c0888.chunk.js.LICENSE.txt": "/algoviz/static/js/2.de1c0888.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.5c107b6a.js",
-    "static/js/2.9ab7502f.chunk.js",
+    "static/js/runtime-main.0a275c40.js",
+    "static/js/2.de1c0888.chunk.js",
     "static/css/main.5a4867d4.chunk.css",
-    "static/js/main.91357684.chunk.js"
+    "static/js/main.06d0b261.chunk.js"
   ]
 }
