@@ -6,9 +6,8 @@
   --sample-color: var(--primary-color);
   display: block;
   flex: 1;
-  padding: 0.25em;
+  padding: 0;
   text-align: center;
-  min-height: 2em;
   background: var(--sample-color);
   transition: all 60ms linear;
 }
@@ -18,7 +17,7 @@
 }
 
 .sampleText {
-  display: block;
+  display: none;
   color: var(--light-color);
 }
 
