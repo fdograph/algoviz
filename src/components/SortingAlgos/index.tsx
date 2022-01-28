@@ -24,7 +24,11 @@ const SortingAlgos: React.FC = () => {
       algo.pause();
       setIsPlaying(false);
     } else {
-      algo.play(30).then((sorted) => setRenderList(sorted));
+      algo.play(30).then((sorted) => {
+        algo.pause();
+        setIsPlaying(false);
+        setRenderList(sorted);
+      });
       setIsPlaying(true);
     }
   }, [algo, isPLaying]);
