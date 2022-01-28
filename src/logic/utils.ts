@@ -1,66 +1,156 @@
-export const shuffleArray = (array: any[]) => {
-  return array.sort(() => (Math.random() > 0.5 ? 1 : -1));
-};
+import { VisualAlgoControl } from "./algorithms";
+
+export type BaseAlgoFn = (
+  list: Map<number, number>,
+  onSortStep: (list: Map<number, number>) => Promise<void>
+) => Promise<Map<number, number>>;
+
+export type VisualAlgoFn = (
+  originalList: number[],
+  setRenderList: (l: number[]) => void,
+  setSelectedIdxs: (idxs: Set<number>) => void
+) => VisualAlgoControl;
 
 export const delay = (t: number) => new Promise((r) => setTimeout(r, t));
 
-export const swap = (base: number, target: number, source: number[]) => {
-  [source[base], source[target]] = [source[target], source[base]];
+export const delayMethod = async (
+  method: () => Promise<void> | void,
+  t: number
+) => {
+  await method();
+  await delay(t);
 };
 
-export const mergeSortedArray = (
-  left: number[],
-  right: number[],
-  leftIndex: number,
-  rightIndex: number
+export const updateAt = (
+  source: Readonly<number[]>,
+  idx: number,
+  val: number
 ) => {
-  const result: number[] = [];
-  let li = 0;
-  let ri = 0;
+  const updated = [...source];
+  updated.splice(idx, 1, val);
 
-  while (li < left.length && ri < right.length) {
-    if (left[li] < right[ri]) {
-      result.push(left[li]);
-      li++;
-    } else {
-      result.push(right[ri]);
-      ri++;
-    }
-  }
+  return updated;
+};
 
-  while (li < left.length) {
-    result.push(left[li]);
-    li++;
-  }
+export const swap = (base: number, target: number, source: number[]) => {
+  const result = [...source];
 
-  while (ri < right.length) {
-    result.push(right[ri]);
-    ri++;
-  }
+  [result[base], result[target]] = [result[target], result[base]];
 
   return result;
 };
 
-export const swapPart = (
-  list: number[],
-  startIndex: number,
-  values: number[]
-): number[] => {
-  const result = [...list];
+export const arrayToMap = (list: number[]): Map<number, number> =>
+  new Map(list.map((v, idx) => [idx, v]));
 
-  values.forEach((v, i) => {
-    result[startIndex + i] = v;
+export const splitMap = (map: Map<number, number>) => {
+  const half = Math.ceil(map.size / 2);
+  const entries = [...map.entries()];
+  const parts = {
+    left: new Map<number, number>(),
+    right: new Map<number, number>(),
+  };
+
+  entries.forEach(([idx, val], entryIdx) => {
+    if (entryIdx < half) {
+      parts.left.set(idx, val);
+    } else {
+      parts.right.set(idx, val);
+    }
   });
 
-  return result;
+  return parts;
 };
 
-export const buildRange = (from: number, to: number): number[] => {
-  const result = [];
+export const updateSortedMap = (map: Map<number, number>, sorted: number[]) => {
+  const entries = [...map.entries()];
+  const sortedMap = new Map<number, number>();
 
-  for (let i = from; i <= to; i++) {
-    result.push(i);
+  entries.forEach(([oIdx, eVal], eIdx) => {
+    sortedMap.set(oIdx, sorted[eIdx]);
+  });
+
+  return sortedMap;
+};
+
+export const buildRandomList = (size: number) => {
+  return [...new Array(size)]
+    .map((n, idx) => idx + 1)
+    .sort(() => (Math.random() > 0.5 ? 1 : -1));
+};
+
+export const graduallyInsertEntries = async (
+  map: Map<number, number>,
+  list: number[],
+  setRenderList: (l: number[]) => void,
+  setSelectedIdxs: (idxs: Set<number>) => void,
+  interval: number
+) => {
+  let resultList = [...list];
+
+  for (const [idx, val] of map.entries()) {
+    const updatedList = updateAt(resultList, idx, val);
+    setSelectedIdxs(new Set<number>([idx]));
+    setRenderList(updatedList);
+    resultList = updatedList;
+
+    await delay(interval);
   }
 
-  return result;
+  return resultList;
+};
+
+export const insertEntries = (map: Map<number, number>, list: number[]) => {
+  let resultList = [...list];
+
+  for (const [idx, val] of map.entries()) {
+    resultList = updateAt(resultList, idx, val);
+  }
+
+  return resultList;
+};
+
+export const listsAreEqual = (l1: number[], l2: number[]): boolean => {
+  return l1.join("") === l2.join("");
+};
+
+let KILL_SWITCH = false;
+export const resetKillSwitch = () => {
+  KILL_SWITCH = false;
+};
+
+export const enableKillSwitch = () => {
+  KILL_SWITCH = true;
+};
+
+export const checkKillSwitch = () => {
+  if (KILL_SWITCH) {
+    throw new Error("Algorithm was paused or killed");
+  }
+};
+
+export type StepFn = (list: Map<number, number>) => Promise<void>;
+export const onSortStep = (
+  originalList: number[],
+  setRenderList: (l: number[]) => void,
+  setSelectedIdxs: (idxs: Set<number>) => void,
+  interval: number
+): StepFn => {
+  return async (list: Map<number, number>) => {
+    await delayMethod(() => {
+      setSelectedIdxs(new Set<number>([...list.keys()]));
+    }, interval);
+
+    const newList = insertEntries(list, originalList);
+
+    if (!listsAreEqual(newList, originalList)) {
+      originalList = await graduallyInsertEntries(
+        list,
+        originalList,
+        setRenderList,
+        setSelectedIdxs,
+        interval
+      );
+    }
+  };
 };
