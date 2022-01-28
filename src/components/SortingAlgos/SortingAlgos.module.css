@@ -22,16 +22,16 @@
 .AlgorithmsControlSelect::before {
     @apply block absolute top-1/2 right-4 w-0 h-0 border-solid;
     content: "";
-    transform: translateY(calc(100% * -1 - 1px));
-    border-width: 0 0.3em 0.3em 0.3em;
+    transform: translateY(calc(100% * -1 - 2px));
+    border-width: 0 0.25em 0.25em 0.25em;
     border-color: transparent transparent white transparent;
 }
 
 .AlgorithmsControlSelect::after {
     @apply block absolute top-1/2 right-4 w-0 h-0 border-solid;
     content: "";
-    transform: translateY(1px);
-    border-width: 0.3em 0.3em 0 0.3em;
+    transform: translateY(2px);
+    border-width: 0.25em 0.25em 0 0.25em;
     border-color: white transparent transparent transparent;
 }
 
