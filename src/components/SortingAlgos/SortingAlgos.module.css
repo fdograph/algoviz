@@ -1,0 +1,45 @@
+.AlgorithmsWrapper {
+    @apply h-full grid grid-cols-1 grid-rows-[1fr_9fr];
+}
+
+.AlgorithmsControls {
+    @apply px-5 flex items-center gap-4;
+}
+
+.AlgorithmsControlField {
+    @apply block p-1;
+}
+
+.AlgorithmsControlSelect {
+    position: relative;
+}
+
+.AlgorithmsControlSelect select {
+    @apply form-select min-w-[15em] border-0;
+    background: #333;
+}
+
+.AlgorithmsControlSelect::before {
+    @apply block absolute top-1/2 right-4 w-0 h-0 border-solid;
+    content: "";
+    transform: translateY(calc(100% * -1 - 1px));
+    border-width: 0 0.3em 0.3em 0.3em;
+    border-color: transparent transparent white transparent;
+}
+
+.AlgorithmsControlSelect::after {
+    @apply block absolute top-1/2 right-4 w-0 h-0 border-solid;
+    content: "";
+    transform: translateY(1px);
+    border-width: 0.3em 0.3em 0 0.3em;
+    border-color: white transparent transparent transparent;
+}
+
+.AlgorithmsControlBtn {
+    @apply p-1 px-3 rounded bg-lime-500 text-neutral-900;
+    color: #222222;
+}
+
+.AlgorithmsControlBtn.isPlaying {
+    @apply bg-orange-600;
+}
