@@ -1,22 +1,15 @@
 {
   "files": {
-    "main.css": "/algoviz/static/css/main.9e377173.chunk.css",
-    "main.js": "/algoviz/static/js/main.c1ff6b0e.chunk.js",
-    "main.js.map": "/algoviz/static/js/main.c1ff6b0e.chunk.js.map",
-    "runtime-main.js": "/algoviz/static/js/runtime-main.0a275c40.js",
-    "runtime-main.js.map": "/algoviz/static/js/runtime-main.0a275c40.js.map",
-    "static/js/2.91975cb8.chunk.js": "/algoviz/static/js/2.91975cb8.chunk.js",
-    "static/js/2.91975cb8.chunk.js.map": "/algoviz/static/js/2.91975cb8.chunk.js.map",
-    "static/js/3.893bb022.chunk.js": "/algoviz/static/js/3.893bb022.chunk.js",
-    "static/js/3.893bb022.chunk.js.map": "/algoviz/static/js/3.893bb022.chunk.js.map",
+    "main.css": "/algoviz/static/css/main.624faf0a.css",
+    "main.js": "/algoviz/static/js/main.c092d408.js",
+    "static/js/787.5c8c3349.chunk.js": "/algoviz/static/js/787.5c8c3349.chunk.js",
     "index.html": "/algoviz/index.html",
-    "static/css/main.9e377173.chunk.css.map": "/algoviz/static/css/main.9e377173.chunk.css.map",
-    "static/js/2.91975cb8.chunk.js.LICENSE.txt": "/algoviz/static/js/2.91975cb8.chunk.js.LICENSE.txt"
+    "main.624faf0a.css.map": "/algoviz/static/css/main.624faf0a.css.map",
+    "main.c092d408.js.map": "/algoviz/static/js/main.c092d408.js.map",
+    "787.5c8c3349.chunk.js.map": "/algoviz/static/js/787.5c8c3349.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.0a275c40.js",
-    "static/js/2.91975cb8.chunk.js",
-    "static/css/main.9e377173.chunk.css",
-    "static/js/main.c1ff6b0e.chunk.js"
+    "static/css/main.624faf0a.css",
+    "static/js/main.c092d408.js"
   ]
 }
