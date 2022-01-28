@@ -78,7 +78,15 @@ const SortingAlgos: React.FC = () => {
         <div className={Styles.AlgorithmsControlField}>
           <AlgoTypeSelector
             selectedType={algoType}
-            onChange={(t) => setAlgoType(t)}
+            onChange={(t) => {
+              const newList = buildRandomList(
+                Math.ceil(window.innerWidth / 10)
+              );
+              algo.pause();
+              setInitialList(newList);
+              setRenderList(newList);
+              setAlgoType(t);
+            }}
           />
         </div>
         <div className={Styles.AlgorithmsControlField}>
