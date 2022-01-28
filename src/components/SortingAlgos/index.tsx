@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { buildRandomList } from "../../logic/utils";
 
 import Styles from "./SortingAlgos.module.css";
@@ -7,9 +13,22 @@ import { Algorithm } from "../Algorithm";
 import { AlgoTypeSelector } from "./AlgoTypeSelector";
 import classNames from "classnames";
 
+const resetOnResize = (
+  setList: (l: number[]) => void,
+  setRenderList: (l: number[]) => void
+) => {
+  return () => {
+    const list = buildRandomList(Math.ceil(window.innerWidth / 10));
+    setList(list);
+    setRenderList(list);
+  };
+};
+
 const SortingAlgos: React.FC = () => {
   const [algoType, setAlgoType] = useState<AlgoType>(AlgoType.BUBBLE_SORT);
-  const [initialList] = useState(buildRandomList(150));
+  const [initialList, setInitialList] = useState(
+    buildRandomList(Math.ceil(window.innerWidth / 10))
+  );
   const [min, max] = [Math.min(...initialList), Math.max(...initialList)];
   const [renderList, setRenderList] = useState<number[]>(initialList);
   const [selectedIdxs, setSelectedIdxs] = useState<Set<number>>(new Set());
@@ -24,11 +43,16 @@ const SortingAlgos: React.FC = () => {
       algo.pause();
       setIsPlaying(false);
     } else {
-      algo.play(30).then((sorted) => {
-        algo.pause();
-        setIsPlaying(false);
-        setRenderList(sorted);
-      });
+      algo
+        .play(30)
+        .then((sorted) => {
+          algo.pause();
+          setIsPlaying(false);
+          setRenderList(sorted);
+        })
+        .catch(() => {
+          console.log("CANCELLED");
+        });
       setIsPlaying(true);
     }
   }, [algo, isPLaying]);
@@ -39,6 +63,14 @@ const SortingAlgos: React.FC = () => {
       algo.pause();
     };
   }, [algo]);
+
+  useLayoutEffect(() => {
+    const onResize = resetOnResize(setInitialList, setRenderList);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
   return (
     <section className={Styles.AlgorithmsWrapper}>

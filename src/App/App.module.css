@@ -1,4 +1,4 @@
 .appWrapper {
     @apply 2xl:container mx-auto w-full;
-    height: 100vh;
+    height: 100%;
 }
