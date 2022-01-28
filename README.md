@@ -10,3 +10,5 @@ npm install
 npm run start
 ```
 
+Or you can visit the [working demo](https://fdograph.github.io/algoviz/)! :D
+
