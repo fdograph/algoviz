@@ -9,6 +9,8 @@ const getAlgoName = (type: AlgoType) => {
       return "Bubble Sort";
     case AlgoType.MERGE_SORT:
       return "Merge Sort";
+    case AlgoType.QUICK_SORT:
+      return "Quick Sort";
     default:
       return "Unknown";
   }

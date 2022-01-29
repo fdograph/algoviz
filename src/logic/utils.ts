@@ -89,6 +89,10 @@ export const graduallyInsertEntries = async (
   let resultList = [...list];
 
   for (const [idx, val] of map.entries()) {
+    if (resultList[idx] === val) {
+      continue;
+    }
+
     const updatedList = updateAt(resultList, idx, val);
     setSelectedIdxs(new Set<number>([idx]));
     setRenderList(updatedList);
@@ -137,10 +141,6 @@ export const onSortStep = (
   interval: number
 ): StepFn => {
   return async (list: Map<number, number>) => {
-    await delayMethod(() => {
-      setSelectedIdxs(new Set<number>([...list.keys()]));
-    }, interval);
-
     const newList = insertEntries(list, originalList);
 
     if (!listsAreEqual(newList, originalList)) {
@@ -153,4 +153,19 @@ export const onSortStep = (
       );
     }
   };
+};
+
+export const filterMap = (
+  map: Map<number, number>,
+  comparator: (key: number, val: number) => boolean
+): Map<number, number> => {
+  const resultMap: Map<number, number> = new Map<number, number>();
+
+  for (const [key, val] of map) {
+    if (comparator(key, val)) {
+      resultMap.set(key, val);
+    }
+  }
+
+  return resultMap;
 };
