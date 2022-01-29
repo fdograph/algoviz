@@ -16,12 +16,10 @@ import classNames from "classnames";
 const resetOnResize = (
   setList: (l: number[]) => void,
   setRenderList: (l: number[]) => void
-) => {
-  return () => {
-    const list = buildRandomList(Math.ceil(window.innerWidth / 10));
-    setList(list);
-    setRenderList(list);
-  };
+) => () => {
+  const list = buildRandomList(Math.ceil(window.innerWidth / 10));
+  setList(list);
+  setRenderList(list);
 };
 
 const SortingAlgos: React.FC = () => {
@@ -29,7 +27,6 @@ const SortingAlgos: React.FC = () => {
   const [initialList, setInitialList] = useState(
     buildRandomList(Math.ceil(window.innerWidth / 10))
   );
-  const [min, max] = [Math.min(...initialList), Math.max(...initialList)];
   const [renderList, setRenderList] = useState<number[]>(initialList);
   const [selectedIdxs, setSelectedIdxs] = useState<Set<number>>(new Set());
   const [isPLaying, setIsPlaying] = useState<boolean>(false);
@@ -104,8 +101,8 @@ const SortingAlgos: React.FC = () => {
         <Algorithm
           renderList={renderList}
           selected={selectedIdxs}
-          max={max}
-          min={min}
+          max={Math.max(...initialList)}
+          min={Math.min(...initialList)}
         />
       </section>
     </section>
