@@ -5,22 +5,20 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import classNames from "classnames";
 import { buildRandomList } from "../../logic/utils";
-
 import Styles from "./SortingAlgos.module.css";
 import { AlgoType, getAlgo } from "../../logic/algorithms";
 import { Algorithm } from "../Algorithm";
 import { AlgoTypeSelector } from "./AlgoTypeSelector";
-import classNames from "classnames";
 
-const resetOnResize = (
-  setList: (l: number[]) => void,
-  setRenderList: (l: number[]) => void
-) => () => {
-  const list = buildRandomList(Math.ceil(window.innerWidth / 10));
-  setList(list);
-  setRenderList(list);
-};
+const resetOnResize =
+  (setList: (l: number[]) => void, setRenderList: (l: number[]) => void) =>
+  () => {
+    const list = buildRandomList(Math.ceil(window.innerWidth / 10));
+    setList(list);
+    setRenderList(list);
+  };
 
 const SortingAlgos: React.FC = () => {
   const [algoType, setAlgoType] = useState<AlgoType>(AlgoType.BUBBLE_SORT);

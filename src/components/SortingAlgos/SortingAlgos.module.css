@@ -11,12 +11,11 @@
 }
 
 .AlgorithmsControlSelect {
-    position: relative;
+    @apply relative
 }
 
 .AlgorithmsControlSelect select {
-    @apply form-select min-w-[15em] border-0;
-    background: #333;
+    @apply form-select min-w-[15em] border-0 bg-neutral-800 bg-none;
 }
 
 .AlgorithmsControlSelect::before {
@@ -37,7 +36,6 @@
 
 .AlgorithmsControlBtn {
     @apply p-1 px-3 rounded bg-lime-500 text-neutral-900;
-    color: #222222;
 }
 
 .AlgorithmsControlBtn.isPlaying {
