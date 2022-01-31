@@ -1,11 +1,7 @@
 import { mergeSortAlgoFn } from "./mergeSort";
 import { bubbleSortAlgoFn } from "./bubbleSort";
 import { quickSortAlgoFn } from "./quickSort";
-
-export type VisualAlgoControl = {
-  play: (interval: number) => Promise<number[]>;
-  pause: () => void;
-};
+import { VisualAlgorithm } from "./utils";
 
 export enum AlgoType {
   BUBBLE_SORT = "@AlgoType/BUBBLE_SORT",
@@ -18,7 +14,7 @@ export const getAlgo = (
   originalList: number[],
   setRenderList: (l: number[]) => void,
   setSelectedIdxs: (idxs: Set<number>) => void
-): VisualAlgoControl => {
+): VisualAlgorithm => {
   switch (type) {
     case AlgoType.MERGE_SORT:
       return mergeSortAlgoFn(originalList, setRenderList, setSelectedIdxs);

@@ -1,5 +1,3 @@
-import { VisualAlgoControl } from "./algorithms";
-
 export type BaseAlgoFn = (
   list: Map<number, number>,
   onSortStep: (list: Map<number, number>) => Promise<void>
@@ -9,7 +7,35 @@ export type VisualAlgoFn = (
   originalList: number[],
   setRenderList: (l: number[]) => void,
   setSelectedIdxs: (idxs: Set<number>) => void
-) => VisualAlgoControl;
+) => VisualAlgorithm;
+
+export class VisualAlgorithm {
+  constructor(
+    protected onPlay: (interval: number) => Promise<number[]>,
+    protected onStop?: () => void
+  ) {}
+
+  protected prePlay() {
+    resetKillSwitch();
+  }
+
+  protected preStop() {
+    enableKillSwitch();
+  }
+
+  public async play(interval: number) {
+    this.prePlay();
+    return await this.onPlay(interval);
+  }
+
+  public stop() {
+    this.preStop();
+
+    if (this.onStop !== undefined) {
+      this.onStop();
+    }
+  }
+}
 
 export const delay = (t: number) => new Promise((r) => setTimeout(r, t));
 

@@ -7,6 +7,7 @@ import {
   resetKillSwitch,
   swap,
   VisualAlgoFn,
+  VisualAlgorithm,
 } from "./utils";
 
 export const bubbleSort: BaseAlgoFn = async (
@@ -39,8 +40,8 @@ export const bubbleSortAlgoFn: VisualAlgoFn = (
   originalList: number[],
   setRenderList: (l: number[]) => void,
   setSelectedIdxs: (idxs: Set<number>) => void
-) => ({
-  play: async (interval: number) => {
+) =>
+  new VisualAlgorithm(async (interval: number) => {
     resetKillSwitch();
 
     const sortedMap = await bubbleSort(
@@ -51,6 +52,4 @@ export const bubbleSortAlgoFn: VisualAlgoFn = (
     setSelectedIdxs(new Set<number>());
 
     return [...sortedMap.values()];
-  },
-  pause: () => enableKillSwitch(),
-});
+  });

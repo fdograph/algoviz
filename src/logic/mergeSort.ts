@@ -7,6 +7,7 @@ import {
   splitMap,
   updateSortedMap,
   VisualAlgoFn,
+  VisualAlgorithm,
 } from "./utils";
 import type { BaseAlgoFn } from "./utils";
 
@@ -78,8 +79,8 @@ export const mergeSortAlgoFn: VisualAlgoFn = (
   originalList: number[],
   setRenderList: (l: number[]) => void,
   setSelectedIdxs: (idxs: Set<number>) => void
-) => ({
-  play: async (interval: number) => {
+) =>
+  new VisualAlgorithm(async (interval: number) => {
     resetKillSwitch();
 
     const sortedMap = await mergeSort(
@@ -90,6 +91,4 @@ export const mergeSortAlgoFn: VisualAlgoFn = (
     setSelectedIdxs(new Set<number>());
 
     return [...sortedMap.values()];
-  },
-  pause: () => enableKillSwitch(),
-});
+  });

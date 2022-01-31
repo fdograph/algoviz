@@ -7,6 +7,7 @@ import {
   swap,
   updateSortedMap,
   VisualAlgoFn,
+  VisualAlgorithm,
 } from "./utils";
 
 export const partition = (
@@ -48,6 +49,8 @@ export const quickSort = async (
   const { idx, resultList } = partition(list, beginIdx, endIdx);
   const sortedMap = updateSortedMap(list, resultList);
 
+  await onSortStep(list);
+
   const sortedA = await quickSort(sortedMap, beginIdx, idx - 1, onSortStep);
   return await quickSort(sortedA, idx + 1, endIdx, onSortStep);
 };
@@ -56,8 +59,8 @@ export const quickSortAlgoFn: VisualAlgoFn = (
   originalList: number[],
   setRenderList: (l: number[]) => void,
   setSelectedIdxs: (idxs: Set<number>) => void
-) => ({
-  play: async (interval: number) => {
+) =>
+  new VisualAlgorithm(async (interval: number) => {
     resetKillSwitch();
 
     const sortedMap = await quickSort(
@@ -70,6 +73,4 @@ export const quickSortAlgoFn: VisualAlgoFn = (
     setSelectedIdxs(new Set<number>());
 
     return [...sortedMap.values()];
-  },
-  pause: () => enableKillSwitch(),
-});
+  });

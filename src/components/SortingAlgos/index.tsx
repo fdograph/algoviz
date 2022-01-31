@@ -35,13 +35,13 @@ const SortingAlgos: React.FC = () => {
 
   const playPause = useCallback(() => {
     if (isPLaying) {
-      algo.pause();
+      algo.stop();
       setIsPlaying(false);
     } else {
       algo
         .play(30)
         .then((sorted) => {
-          algo.pause();
+          algo.stop();
           setIsPlaying(false);
           setRenderList(sorted);
         })
@@ -55,7 +55,7 @@ const SortingAlgos: React.FC = () => {
   useEffect(() => {
     return () => {
       setIsPlaying(false);
-      algo.pause();
+      algo.stop();
     };
   }, [algo]);
 
@@ -77,7 +77,7 @@ const SortingAlgos: React.FC = () => {
               const newList = buildRandomList(
                 Math.ceil(window.innerWidth / 10)
               );
-              algo.pause();
+              algo.stop();
               setInitialList(newList);
               setRenderList(newList);
               setAlgoType(t);
